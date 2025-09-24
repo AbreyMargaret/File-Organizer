@@ -26,10 +26,12 @@ def list_choose_file(folder_path):
          
          if choice == 0:
                 break
+         
+         
          chosen_file = files [choice - 1]
          file_path = os.path.join(folder_path, chosen_file)
          print(f"\nYou selected: {chosen_file} ")
-         feature_choice = input("(a) Read  (b) Copy  (c) Move  (d) Delete: ")
+         feature_choice = input("(a) Read  (b) Copy  (c) Move  (d) Delete (e)Rename: ")
          menu_features(feature_choice, file_path)
 
         
@@ -53,6 +55,9 @@ def menu_features(input, file_path):
                 move(file_path)
         elif input == 'd':
                 delete(file_path)
+        elif input == 'e':
+               rename(file_path)
+               
 
 
 
@@ -60,15 +65,22 @@ def read(file_path):
          os.startfile(file_path)
         
 
-def copy():
+def copy(file_path):
         print("Copy")
 
-def move():
+def move(file_path):
         print("Move")
 
-def delete():
+def delete(file_path):
         print("Delete")
 
+def rename(file_path):
+       enter = input("Name: ")
+       base, ext = os.path.splitext(file_path)
+       new_file_name = enter + ext
+       same_file_path = os.path.join(directory_docs, new_file_name)
+       os.rename(file_path, same_file_path)
+       print(f"You renamed {file_path} to {same_file_path}")
 
 def select_folder():
         while True:
