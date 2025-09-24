@@ -1,4 +1,5 @@
 import os
+import shutil
 
 directory_path = r"C:\Users\barce\python-projects\OrganizeF\Files"
 directory_docs = r"C:\Users\barce\python-projects\OrganizeF\Files\Docs"
@@ -66,13 +67,23 @@ def read(file_path):
         
 
 def copy(file_path):
-        print("Copy")
+       folder = os.path.dirname(file_path)
+       base,ext = os.path.splitext(os.path.basename(file_path))
+
+       new_file = base + " copy" + ext
+       destination = os.path.join(folder, new_file)
+
+       shutil.copy2(file_path, destination)
+       print(f"{file_path} copied!")
+        
+
 
 def move(file_path):
         print("Move")
 
 def delete(file_path):
-        print("Delete")
+        os.remove(file_path)
+        print(f"{file_path} removed")
 
 def rename(file_path):
        enter = input("Name: ")
