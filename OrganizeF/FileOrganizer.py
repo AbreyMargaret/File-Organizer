@@ -19,6 +19,8 @@ def documents():
        for docs in all_docs:
                    print(f"{b}.) {docs}")
                    b += 1
+       enter_doc = input("Select Doc by number: ")
+       menu_features(enter_doc)
 
 
 def images():
@@ -26,19 +28,51 @@ def images():
         for images in all_images:
                    print(f"{c}.) {images}")
                    c += 1
+        enter_images = input("Select images by number: ")
+        menu_features(enter_images)
 
 def pdf():
         d = 1
         for pdf in all_pdf:
                    print(f"{d}.) {pdf}")
                    d += 1
+        enter_pdf = input("Select PDF by number: ")
+        menu_features(enter_pdf)
+
 
 def python_project():
         e = 1
         for pythonProject in all_pythonProjects:
                    print(f"{e}.) {pythonProject}")
                    e += 1
-        
+        enter_pythonProject = input("Select Python Folder by number: ")
+        menu_features(enter_pythonProject)
+
+
+def menu_features(input):
+        print("(a)Read b(Copy) c(Move) d(Delete)")
+        if input == 'a':
+                read()
+        elif input == 'b':
+                copy()
+        elif input == 'c':
+                move()
+        elif input == 'd':
+                delete()
+
+
+
+def read():
+        print("Read")
+
+def copy():
+        print("Copy")
+
+def move():
+        print("Move")
+
+def delete():
+        print("Delete")
 
 
 print("========= FILE ORGANIZER ==============")
@@ -57,11 +91,14 @@ def select_folder(enter):
             documents()
     elif enter == 2:
             print("\nImages:")
+            images()
     elif enter == 3:
             print("\nPDF:")
+            pdf()
             
     elif enter == 4:
             print("\nPython Projects:")
+            python_project()
             
 
 select_folder(enter)
