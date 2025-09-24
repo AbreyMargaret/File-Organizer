@@ -14,45 +14,24 @@ all_pdf = os.listdir(directory_pdf)
 all_pythonProjects = os.listdir(directory_pythonProject)
 
 
-def documents():
-       b = 1
-       for docs in all_docs:
-                   print(f"{b}.) {docs}")
-                   b += 1
-       enter_doc = int(input("Select Doc by number: "))
-       chosen_file = all_docs[enter_doc - 1]
-       file_path = os.path.join(directory_docs, chosen_file)
+def list_choose_file(folder_path):
+        print()
+        while True:
+         print("==== FILES ====")
+         files = os.listdir(folder_path)
+         print("0.) Back ")
+         for i, f in enumerate(files, start = 1):
+                print(f"{i}.) {f}")
+         choice = int(input("\nSelect file by number: "))
+         
+         if choice == 0:
+                break
+         chosen_file = files [choice - 1]
+         file_path = os.path.join(folder_path, chosen_file)
+         print(f"\nYou selected: {chosen_file} ")
+         feature_choice = input("(a) Read  (b) Copy  (c) Move  (d) Delete: ")
+         menu_features(feature_choice, file_path)
 
-       print(f"\nYou selected: {chosen_file}")
-       feature_choice = input("(a) Read  (b) Copy  (c) Move  (d) Delete: ")
-
-       menu_features(feature_choice,file_path)
-
-
-def images():
-        c = 1
-        for images in all_images:
-                   print(f"{c}.) {images}")
-                   c += 1
-        enter_images = int(input("Select images by number: "))
-        chosen_file = all_images[enter_images - 1]
-        file_path = os.path.join(directory_images, chosen_file)
-        print(f"\nYou selected: {chosen_file}")
-        feature_choice = input("(a) Read  (b) Copy  (c) Move  (d) Delete: ")
-        menu_features(feature_choice,file_path)
-
-def pdf():
-        d = 1
-        for pdf in all_pdf:
-                   print(f"{d}.) {pdf}")
-                   d += 1
-        enter_pdf = int(input("Select PDF by number: "))
-        chosen_file = all_pdf[enter_pdf - 1]
-        file_path = os.path.join(directory_pdf, chosen_file)
-        print(f"\nYou selected: {chosen_file}")
-        feature_choice = input("(a) Read  (b) Copy  (c) Move  (d) Delete: ")
-        menu_features(feature_choice, file_path)
-        
         
 
 
@@ -91,33 +70,34 @@ def delete():
         print("Delete")
 
 
-print("========= FILE ORGANIZER ==============")
+def select_folder():
+        while True:
+                print("\n========= FILE ORGANIZER ==============")
+                print("0.) Create folder")
+                all_entries = os.listdir(directory_path) 
+                
+                for a, folders in enumerate(all_entries, start = 1):
+                 print(f"{a}.) {folders}")
+                
 
-a = 1
+                enter = int(input("Select which folder: "))
+                
+                if enter == 0:
+                  print("\nCreate new Folder")
+                  new_file = (input("Name: "))
+                  os.mkdir(os.path.join(directory_path, new_file))
+                  print(f"{new_file} created successfully")
+                
+                else: 
+                        chosen_folder = all_entries[enter - 1]
+                        folder_path = os.path.join(directory_path, chosen_folder)
+                        list_choose_file(folder_path)
 
-for folders in all_entries:
-    print(f"{a}.) {folders}")
-    a += 1
 
-enter = int(input("Select which folder: "))
 
-def select_folder(enter):
-    if enter == 1:
-            print("\nDocuments:")
-            documents()
-    elif enter == 2:
-            print("\nImages:")
-            images()
-    elif enter == 3:
-            print("\nPDF:")
-            pdf()
-            
-    elif enter == 4:
-            print("\nPython Projects:")
-            python_project()
-            
 
-select_folder(enter)
+
+select_folder()
 
 
 
