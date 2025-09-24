@@ -19,8 +19,14 @@ def documents():
        for docs in all_docs:
                    print(f"{b}.) {docs}")
                    b += 1
-       enter_doc = input("Select Doc by number: ")
-       menu_features(enter_doc)
+       enter_doc = int(input("Select Doc by number: "))
+       chosen_file = all_docs[enter_doc - 1]
+       file_path = os.path.join(directory_docs, chosen_file)
+
+       print(f"\nYou selected: {chosen_file}")
+       feature_choice = input("(a) Read  (b) Copy  (c) Move  (d) Delete: ")
+
+       menu_features(feature_choice,file_path)
 
 
 def images():
@@ -28,16 +34,26 @@ def images():
         for images in all_images:
                    print(f"{c}.) {images}")
                    c += 1
-        enter_images = input("Select images by number: ")
-        menu_features(enter_images)
+        enter_images = int(input("Select images by number: "))
+        chosen_file = all_images[enter_images - 1]
+        file_path = os.path.join(directory_images, chosen_file)
+        print(f"\nYou selected: {chosen_file}")
+        feature_choice = input("(a) Read  (b) Copy  (c) Move  (d) Delete: ")
+        menu_features(feature_choice,file_path)
 
 def pdf():
         d = 1
         for pdf in all_pdf:
                    print(f"{d}.) {pdf}")
                    d += 1
-        enter_pdf = input("Select PDF by number: ")
-        menu_features(enter_pdf)
+        enter_pdf = int(input("Select PDF by number: "))
+        chosen_file = all_pdf[enter_pdf - 1]
+        file_path = os.path.join(directory_pdf, chosen_file)
+        print(f"\nYou selected: {chosen_file}")
+        feature_choice = input("(a) Read  (b) Copy  (c) Move  (d) Delete: ")
+        menu_features(feature_choice, file_path)
+        
+        
 
 
 def python_project():
@@ -49,21 +65,21 @@ def python_project():
         menu_features(enter_pythonProject)
 
 
-def menu_features(input):
-        print("(a)Read b(Copy) c(Move) d(Delete)")
+def menu_features(input, file_path):
         if input == 'a':
-                read()
+                read(file_path)
         elif input == 'b':
-                copy()
+                copy(file_path)
         elif input == 'c':
-                move()
+                move(file_path)
         elif input == 'd':
-                delete()
+                delete(file_path)
 
 
 
-def read():
-        print("Read")
+def read(file_path):
+         os.startfile(file_path)
+        
 
 def copy():
         print("Copy")
