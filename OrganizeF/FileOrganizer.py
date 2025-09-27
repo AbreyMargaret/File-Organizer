@@ -78,12 +78,37 @@ def copy(file_path):
         
 
 
-def move(file_path):
-        print("Move")
+def move(file_path):  
+        print()
+        while True:
+               all_entries = [f for f in os.listdir(directory_path) if os.path.isdir(os.path.join(directory_path, f))]
+
+               for a, folders in enumerate(all_entries, start = 1):
+                      
+                      print(f"{a}.) {folders}")
+               enter = input("\nSelect folder number to move into (or 'q' to quit): ")
+               if enter.lower() == "q":
+                    print("Cancelled moving.")
+                    break
+               if enter.isdigit():
+                      enter = int(enter)
+                      if 1 <= enter <= len(all_entries):
+                             chosen_folder = all_entries[enter - 1]
+                             chosen_destination = os.path.join(directory_path, chosen_folder, os.path.basename(file_path))
+                             shutil.move(file_path, chosen_destination)
+                             print(f"\nMoved {os.path.basename(file_path)} → {chosen_destination}")
+                             break
+                      else:
+                             print("Invalid number, try again")
+               else:
+                      print("Please enter a number")
+
+
 
 def delete(file_path):
         os.remove(file_path)
         print(f"{file_path} removed")
+
 
 def rename(file_path):
        enter = input("Name: ")
@@ -92,6 +117,8 @@ def rename(file_path):
        same_file_path = os.path.join(directory_docs, new_file_name)
        os.rename(file_path, same_file_path)
        print(f"You renamed {file_path} to {same_file_path}")
+
+
 
 def select_folder():
         while True:
