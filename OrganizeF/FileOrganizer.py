@@ -21,9 +21,22 @@ def list_choose_file(folder_path):
          print("==== FILES ====")
          files = os.listdir(folder_path)
          print("0.) Back ")
-         for i, f in enumerate(files, start = 1):
+         print("1.) Create Subfolder")
+         for i, f in enumerate(files, start = 2):
                 print(f"{i}.) {f}")
          choice = int(input("\nSelect file by number: "))
+
+         if choice == 1:
+            print("\nCreate new Sub Folder")
+            sub_folder = input("Name (or type BACK to cancel): ")
+            if sub_folder.upper() == "BACK":  # check before creating
+                continue
+            new_path = os.path.join(folder_path, sub_folder)
+            os.mkdir(new_path)
+            print(f"\n{sub_folder} created successfully!")
+            continue
+
+          
          
          if choice == 0:
                 break
@@ -34,6 +47,10 @@ def list_choose_file(folder_path):
          print(f"\nYou selected: {chosen_file} ")
          feature_choice = input("(a) Read  (b) Copy  (c) Move  (d) Delete (e)Rename: ")
          menu_features(feature_choice, file_path)
+
+         
+              
+
 
         
 
@@ -58,6 +75,7 @@ def menu_features(input, file_path):
                 delete(file_path)
         elif input == 'e':
                rename(file_path)
+     
                
 
 
@@ -118,6 +136,8 @@ def rename(file_path):
        os.rename(file_path, same_file_path)
        print(f"You renamed {file_path} to {same_file_path}")
 
+
+      
 
 
 def select_folder():
